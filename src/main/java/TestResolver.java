@@ -16,6 +16,7 @@ import gulava.Stream;
 import gulava.Streams;
 import static gulava.Goals.conj;
 import static gulava.Goals.same;
+import gulava.annotation.MakePredicates;
 
 public class TestResolver {
 
@@ -28,7 +29,7 @@ public class TestResolver {
         break;
       }
 
-      System.out.println("\n--------------------------------------------------------------------------------");
+      System.out.println("\n----------------- iteration: " + (totalSteps + 1));
       dumper.dump(s);
       dumper.flush();
 
@@ -43,7 +44,7 @@ public class TestResolver {
       s = s.rest();
       totalSteps++;
     }
-    System.out.println("total steps: " + totalSteps);
+    System.out.println("----------------- Final total steps: " + totalSteps);
   }
 
   public static void main(String[] args) throws Exception {
@@ -60,6 +61,27 @@ public class TestResolver {
         Goals.same(b, Cons.of(43, y)));
     print(g.run(Subst.EMPTY), 10, a, b);
 
+  }
+
+  @MakePredicates
+  public static abstract class Parent {
+
+      public abstract Goal parent(Object parent, Object child);
+
+      final Goal parent_fact_1(Object parent, Object child) {
+          // TODO
+          return Goals.UNIT;
+      }
+
+      final Goal parent_fact_2(Object parent, Object child) {
+          // TODO
+          return Goals.UNIT;
+      }
+
+      final Goal parent_fact_3(Object parent, Object child) {
+          // TODO
+          return Goals.UNIT;
+      }
   }
 
 }
